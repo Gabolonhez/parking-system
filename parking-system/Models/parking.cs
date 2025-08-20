@@ -11,37 +11,47 @@
             this.precoInicial = precoInicial;
             this.precoPorHora = precoPorHora;
         }
-
         public void AdicionarVeiculo()
         {
-            // Implementado!!!!!
             Console.WriteLine("Digite a placa do veículo para estacionar:");
             string? placa = Console.ReadLine();
+           if (!string.IsNullOrWhiteSpace(placa))
+            {
+                veiculos.Add(placa);
+            }
+            else
+            {
+                Console.WriteLine("Essa placa não é válida.");
+            }
         }
 
         public void RemoverVeiculo()
         {
             Console.WriteLine("Digite a placa do veículo para remover:");
-       
             string? placa = Console.ReadLine();
 
-
-            if (veiculos.Any(x => x.ToUpper() == placa.ToUpper()))
+            if (!string.IsNullOrWhiteSpace(placa) && veiculos.Any(x => x.ToUpper() == placa.ToUpper()))
             {
                 Console.WriteLine("Digite a quantidade de horas que o veículo permaneceu estacionado:");
-                // TODO: Pedir para o usuário digitar a quantidade de horas que o veículo permaneceu estacionado,
-                // TODO: Realizar o seguinte cálculo: "precoInicial + precoPorHora * horas" para a variável valorTotal                
-                // *IMPLEMENTE AQUI*
-     
-                int horas = int.Parse(Console.ReadLine());
+                int horas = 0;
+                string? inputHoras = Console.ReadLine();
+                if (!int.TryParse(inputHoras, out horas) || horas == 0)
+                {
+                    Console.WriteLine("Horas inexistentes, tente novamente adicionar uma hora");
+                    return;
+                }
+
                 decimal valorTotal = precoInicial + precoPorHora * horas;
 
-                veiculos.Remove(placa);
+                if (valorTotal == 0)
+                {
+                    Console.WriteLine("Valor total inexistente, adicione novamente");
+                }
 
-                // TODO: Remover a placa digitada da lista de veículos
-                // *IMPLEMENTE AQUI*
+                veiculos.Remove(veiculos.First(x => x.ToUpper() == placa.ToUpper()));
 
                 Console.WriteLine($"O veículo {placa} foi removido e o preço total foi de: R$ {valorTotal}");
+
             }
             else
             {
