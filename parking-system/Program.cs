@@ -5,13 +5,23 @@ Console.OutputEncoding = System.Text.Encoding.UTF8;
 decimal precoInicial = 0;
 decimal precoPorHora = 0;
 
+Console.WriteLine("Seja bem vindo ao sistema de estacionamento!\n");
 
-Console.WriteLine("Seja bem vindo ao sistema de estacionamento!\n" + "Digite o preço inicial:");
-precoInicial = Convert.ToDecimal(Console.ReadLine());
+while (true)
+{
+    Console.WriteLine("Digite o preço inicial:");
+    if (decimal.TryParse(Console.ReadLine(), out precoInicial) && precoInicial >= 0)
+        break;
+    Console.WriteLine("Valor inválido. Tente novamente.");
+}
 
-Console.WriteLine("Agora digite o preço por hora:");
-precoPorHora = Convert.ToDecimal(Console.ReadLine());
-
+while (true)
+{
+    Console.WriteLine("Agora digite o preço por hora:");
+    if (decimal.TryParse(Console.ReadLine(), out precoPorHora) && precoPorHora >= 0)
+        break;
+    Console.WriteLine("Valor inválido. Tente novamente.");
+}
 
 Parking es = new Parking (precoInicial, precoPorHora);
 
@@ -20,7 +30,7 @@ bool exibirMenu = true;
 
 while (exibirMenu)
 {
-    Console.Clear();
+
     Console.WriteLine("Digite a sua opção:");
     Console.WriteLine("1 - Cadastrar veículo");
     Console.WriteLine("2 - Remover veículo");
