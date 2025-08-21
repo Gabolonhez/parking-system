@@ -4,6 +4,7 @@
     {
         private decimal precoInicial = 0;
         private decimal precoPorHora = 0;
+
         private List<string> veiculos = new List<string>();
 
         public Parking(decimal precoInicial, decimal precoPorHora)
@@ -15,6 +16,7 @@
         {
             Console.WriteLine("Digite a placa do veículo para estacionar:");
             string? placa = Console.ReadLine();
+            Console.WriteLine("Estacionado com sucesso");
            if (!string.IsNullOrWhiteSpace(placa))
             {
                 veiculos.Add(placa);
@@ -58,7 +60,6 @@
                 Console.WriteLine("Desculpe, esse veículo não está estacionado aqui. Confira se digitou a placa corretamente");
             }
         }
-
         public void ListarVeiculos()
         {
             if (veiculos.Any())
